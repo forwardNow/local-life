@@ -1,6 +1,6 @@
 import Router from '@koa/router';
 import HomeDao from './home.dao';
-import JsonResult from '../common/JsonResult';
+import JsonResult from '../common/utils/JsonResult';
 
 export default class HomeController {
   private router: Router;
