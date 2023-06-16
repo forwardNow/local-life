@@ -6,3 +6,53 @@
   width: 100%;
   height: 100%;
 }
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  margin: 14rpx;
+
+  border-top: solid 1rpx #d5d5d5;
+  border-left: solid 1rpx #d5d5d5;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  width: 241rpx;
+  height: 199rpx;
+
+  border-right: solid 1rpx #d5d5d5;
+  border-bottom: solid 1rpx #d5d5d5;
+
+  box-sizing: border-box;
+}
+
+.grid-item image {
+  margin-top: 40rpx;
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.grid-item text {
+  margin-top: 8rpx;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1;
+}
+
+.ads {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 0 14rpx;
+}
+
+.ads image {
+  width: 350rpx;
+  height: 112rpx;
+}

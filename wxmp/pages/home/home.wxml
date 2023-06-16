@@ -3,7 +3,23 @@
   indicator-dots
   circular
 >
-  <swiper-item wx:for="{{swiperList}}" wx:key="id">
+  <swiper-item wx:for="{{slides}}" wx:key="id">
     <image src="{{ item.image }}"></image>
   </swiper-item>
 </swiper>
+
+<view class="grid">
+  <view
+    class="grid-item"
+    wx:for="{{categories}}"
+    wx:key="id"
+  >
+    <image src="{{ item.icon }}"></image>
+    <text>{{ item.name }}</text>
+  </view>
+</view>
+
+<view class="ads">
+  <image src="/images/ads/ad_01.png"></image>
+  <image src="/images/ads/ad_02.png"></image>
+</view>

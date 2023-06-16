@@ -18,12 +18,20 @@ export default class HomeController {
 
   private addRoutes() {
     this.getSlides();
+    this.getCategories();
   }
 
   getSlides() {
     this.router.get('/home/slides', (ctx) => {
-      const swiperList = this.dao.getSwiperList();
-      ctx.response.body = JsonResult.SUCCESS(swiperList);
+      const slides = this.dao.getSlides();
+      ctx.response.body = JsonResult.SUCCESS(slides);
+    });
+  }
+
+  getCategories() {
+    this.router.get('/home/categories', (ctx) => {
+      const categories = this.dao.getCategories();
+      ctx.response.body = JsonResult.SUCCESS(categories);
     });
   }
 }
