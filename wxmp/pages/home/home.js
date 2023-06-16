@@ -1,19 +1,35 @@
 // pages/home/home.js
 Page({
   /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
-  },
-  /**
    * 页面的初始数据
    */
   data: {
-    swiperList: [
-      { id: 1, img: 'https://picsum.photos/id/101/375/200', link: '' },
-      { id: 2, img: 'https://picsum.photos/id/201/375/200', link: '' },
-      { id: 3, img: 'https://picsum.photos/id/301/375/200', link: '' },
-    ]
+    swiperList: []
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    this.getSwiperList();
+  },
+
+  getSwiperList() {
+    wx.request({
+      url: 'http://localhost:3000/home/slides',
+      method: 'GET',
+      data: {
+        id: 1,
+      },
+      success: (res) => {
+        const {
+          data: swiperList
+        } = res.data;
+
+        this.setData({
+          swiperList,
+        })
+      }
+    });
   },
 })

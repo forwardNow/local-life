@@ -4,6 +4,6 @@
   circular
 >
   <swiper-item wx:for="{{swiperList}}" wx:key="id">
-    <image src="{{ item.img }}"></image>
+    <image src="{{ item.image }}"></image>
   </swiper-item>
 </swiper>
