@@ -1,4 +1,5 @@
-// pages/home/home.js
+import HOST from '../../config/host';
+
 Page({
   /**
    * 页面的初始数据
@@ -18,7 +19,7 @@ Page({
 
   getSlides() {
     wx.request({
-      url: 'http://localhost:3000/home/slides',
+      url: HOST + '/home/slides',
       method: 'GET',
       success: (res) => {
         const { data: slides } = res.data;
@@ -30,7 +31,7 @@ Page({
 
   getCategories() {
     wx.request({
-      url: 'http://localhost:3000/home/categories',
+      url: HOST + '/home/categories',
       method: 'GET',
       success: (res) => {
         const { data: categories } = res.data;

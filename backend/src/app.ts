@@ -1,9 +1,14 @@
+import fs from 'fs';
+
 import Koa from 'koa';
 import Router from '@koa/router';
 import { koaBody } from 'koa-body';
 import koaStatic from 'koa-static';
 
-import { STATIC_ROOT } from './common/config/contant';
+import { HOST, PORT, STATIC_ROOT } from './common/config/contant';
+
+import { rewriteHostFile } from './common/utils/wxmpServerHost';
+
 import HomeController from './home/home.controller';
 
 const app = new Koa();
@@ -17,6 +22,8 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.listen(3000, () => {
-  console.log('server is started: http://localhost:3000')
+app.listen(PORT, () => {
+  console.log(`server is started: ${HOST}`)
 });
+
+rewriteHostFile();
