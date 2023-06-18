@@ -1,19 +1,18 @@
 import fs from 'fs';
-import { HOST } from '../config/contant';
 import path from 'path';
-
-const isDev = process.env.NODE_ENV === 'development';
+import { HOST, IS_DEV } from '../config/contant';
+import { appLogger } from '../config/log4js';
 
 export function rewriteHostFile() {
-  if (!isDev) {
+  if (!IS_DEV) {
     return;
   }
 
   const filePath = path.resolve(__dirname, '../../../../', './wxmp/config/host.js');
 
-  const content = `export default '${HOST}';`;
+  const content = `export default '${ HOST }';`;
   fs.writeFileSync(filePath, content);
 
-  console.log(`${filePath} is rewrote`);
+  appLogger.info(`${ filePath } is rewrote`);
 }
 
