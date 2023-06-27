@@ -1,4 +1,4 @@
-import { foodShopList } from './shop.data';
+import { foodShopList, ktvShopList } from './shop.data';
 import { Pager } from '../common/basic/common';
 
 interface Shop {
@@ -10,7 +10,15 @@ interface Shop {
 }
 
 enum Categories {
-  FOOD = 1,
+ FOOD = 1, // 美食
+ BATHING_FOOT_THERAPY = 2, // 洗浴足疗
+ marriage = 3, // 结婚啦
+ KTV = 4, // 卡拉OK
+ JOB = 5, // 找工作
+ TUTORING = 6, // 辅导班
+ CAR_MAINTENANCE = 7, // 汽车保养
+ HOUSE_RENTING = 8, // 租房
+ RENOVATION = 9, // 装修
 }
 
 export default class ShopDao {
@@ -32,6 +40,10 @@ function getListByCategory(category: Categories) {
 
   if (category === Categories.FOOD) {
     list = foodShopList;
+  }
+
+  if (category === Categories.KTV) {
+    list = ktvShopList;
   }
 
   return list;
