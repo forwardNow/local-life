@@ -1,4 +1,4 @@
-import Router from '@koa/router';
+import Router from '@koa/router/index';
 import HomeDao from './home.dao';
 import JsonResult from '../common/utils/JsonResult';
 

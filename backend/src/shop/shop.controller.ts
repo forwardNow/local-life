@@ -1,6 +1,7 @@
-import Router from '@koa/router';
+import Router from '@koa/router/index';
 import ShopDao from './shop.dao';
 import JsonResult from '../common/utils/JsonResult';
+import { Pager } from '../common/basic/common';
 
 export default class ShopController {
   private router: Router;
@@ -17,21 +18,28 @@ export default class ShopController {
   }
 
   private addRoutes() {
-    this.getSlides();
-    this.getCategories();
+    this.getShopList();
   }
 
-  getSlides() {
-    this.router.get('/home/slides', (ctx) => {
-      const slides = this.dao.getSlides();
-      ctx.response.body = JsonResult.SUCCESS(slides);
-    });
-  }
+  getShopList() {
+    this.router.post('/shop/list', (ctx) => {
+      const { category, pageIndex, pageSize } = ctx.request.body as ShopListRequestBody;
 
-  getCategories() {
-    this.router.get('/home/categories', (ctx) => {
-      const categories = this.dao.getCategories();
-      ctx.response.body = JsonResult.SUCCESS(categories);
+      const list = this.dao.getShopList(category, { pageIndex, pageSize });
+
+      const pager: Pager = {
+        total: this.dao.getShopTotal(category),
+        pageIndex,
+        pageSize,
+      }
+
+      ctx.response.body = JsonResult.SUCCESS({ list, pager });
     });
   }
+}
+
+interface ShopListRequestBody {
+  category: number,
+  pageIndex: number,
+  pageSize: number
 }
