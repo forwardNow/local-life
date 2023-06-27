@@ -1,4 +1,4 @@
-import { HOST } from '../common/config/contant';
+import { HOST } from '../common/config/constant';
 
 export const slides = [
   { id: 1, image: HOST + '/images/slides/1.png', link: '' },

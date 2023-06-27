@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { HOST, IS_DEV } from '../config/contant';
+import { HOST, IS_DEV } from '../config/constant';
 import { appLogger } from '../config/log4js';
 
 export function rewriteHostFile() {

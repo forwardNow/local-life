@@ -1,5 +1,5 @@
 import log4js from 'log4js';
-import { IS_DEV, LOG_DIR } from './contant';
+import { IS_DEV, LOG_DIR } from './constant';
 
 const { levels } = log4js;
 

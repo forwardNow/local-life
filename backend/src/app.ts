@@ -8,16 +8,18 @@ import koaStatic from 'koa-static';
 import log4jKoaMiddleware from './common/middleware/log4js';
 import { appLogger } from './common/config/log4js';
 
-import { HOST, PORT, STATIC_ROOT } from './common/config/contant';
+import { HOST, PORT, STATIC_ROOT } from './common/config/constant';
 
 import { rewriteHostFile } from './common/utils/wxmpServerHost';
 
 import HomeController from './home/home.controller';
+import ShopController from './shop/shop.controller';
 
 const app = new Koa();
 const router = new Router();
 
 HomeController.getInstance(router);
+ShopController.getInstance(router);
 
 app
   .use(koaBody())
