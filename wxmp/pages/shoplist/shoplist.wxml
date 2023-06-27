@@ -1,2 +1,20 @@
 <!--pages/shoplist/shoplist.wxml-->
-<text>pages/shoplist/shoplist.wxml</text>
+<view class="shop-list">
+  <view 
+    class="shop-item"
+    wx:for="{{ shopList }}"
+    wx:key="index"
+  >
+    <view class="thumb-box">
+      <image class="thumb" src="{{ item.frontImg }}"></image>
+    </view>
+    <view class="info">
+      <view class="shop-name">{{ item.name }}</view>
+      <view class="location">
+        <text class="area">{{ item.areaName }}</text>
+        <text class="distance">{{ item.distance }}</text>
+      </view>
+      <view class="catetory">{{ item.cateName }}</view>
+    </view>
+  </view>
+</view>
