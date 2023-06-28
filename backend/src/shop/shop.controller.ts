@@ -25,10 +25,12 @@ export default class ShopController {
     this.router.post('/shop/list', (ctx) => {
       const { category, pageIndex, pageSize } = ctx.request.body as ShopListRequestBody;
 
-      const list = this.dao.getShopList(Number(category), { pageIndex, pageSize });
+      const fmtCategory = Number(category);
+
+      const list = this.dao.getShopList(fmtCategory, { pageIndex, pageSize });
 
       const pager: Pager = {
-        total: this.dao.getShopTotal(category),
+        total: this.dao.getShopTotal(fmtCategory),
         pageIndex,
         pageSize,
       }
