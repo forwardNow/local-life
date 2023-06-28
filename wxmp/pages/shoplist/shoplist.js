@@ -27,11 +27,22 @@ Page({
   },
 
   onReachBottom() {
-    if (this.data.isLoading) {
+    const {
+      isLoading,
+      pageIndex,
+      pageSize,
+      total,
+    } = this.data;
+
+    if (isLoading) {
       return;
     }
 
-    if (this.data.total === this.data.shopList.length) {
+    if (pageIndex * pageSize >= total) { // 没有下一页了
+      wx.showToast({
+        title: '数据加载完毕',
+        icon: 'none'
+      });
       return;
     }
 
@@ -39,7 +50,17 @@ Page({
     this.getShopList();
   },
 
-  getShopList() {
+  onPullDownRefresh() {
+    this.setData({
+      pageIndex: 1,
+      total: 0,
+      shopList: [],
+    })
+
+    this.getShopList(() => wx.stopPullDownRefresh());
+  },
+
+  getShopList(callback) {
     wx.showLoading({
       title: '数据加载....',
     });
@@ -76,6 +97,10 @@ Page({
       complete: () => {
         wx.hideLoading();
         this.setData({ isLoading: false })
+
+        if (typeof callback === 'function') {
+          callback();
+        }
       },
     });
   }
