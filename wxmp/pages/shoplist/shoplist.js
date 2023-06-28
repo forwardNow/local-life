@@ -18,6 +18,32 @@ Page({
   },
   onLoad(options) { 
     this.setData({ query: options });
+    this.getShopList();
+  },
+
+  onReady() { 
+    const { title } = this.data.query;
+    wx.setNavigationBarTitle({ title });
+  },
+
+  onReachBottom() {
+    if (this.data.isLoading) {
+      return;
+    }
+
+    if (this.data.total === this.data.shopList.length) {
+      return;
+    }
+
+    this.setData({ pageIndex: this.data.pageIndex + 1 }); 
+    this.getShopList();
+  },
+
+  getShopList() {
+    wx.showLoading({
+      title: '数据加载....',
+    });
+    this.setData({ isLoading: true })
 
     const { 
       query: {
@@ -26,19 +52,6 @@ Page({
       pageIndex,
       pageSize,
     } = this.data;
-
-    this.getShopList(category, pageIndex, pageSize);
-  },
-
-  onReady() { 
-    const { title } = this.data.query;
-    wx.setNavigationBarTitle({ title });
-  },
-
-  getShopList(category, pageIndex, pageSize) {
-    wx.showLoading({
-      title: '数据加载....',
-    });
 
     wx.request({
       url: HOST + '/shop/list',
@@ -49,7 +62,7 @@ Page({
         pageSize,
       },
       success: (res) => {
-        const { data: { list, total } } = res.data;
+        const { data: { list, pager: { total } } } = res.data;
 
         this.setData({ 
           shopList: [
@@ -62,6 +75,7 @@ Page({
 
       complete: () => {
         wx.hideLoading();
+        this.setData({ isLoading: false })
       },
     });
   }
